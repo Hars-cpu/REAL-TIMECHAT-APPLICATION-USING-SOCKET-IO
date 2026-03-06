@@ -70,7 +70,12 @@ export const login=async (req,res)=>{
 
  export const logOut=async (req,res)=>{
     try {
-        res.clearCookie("token")
+        res.clearCookie("token",{
+     httpOnly:true,
+     maxAge:7*24*60*60*1000,
+     sameSite:"None",
+     secure:true
+    })
         return res.status(200).json({message:"log out successfully"})
     } catch (error) {
         return res.status(500).json({message:`logout error ${error}`})
